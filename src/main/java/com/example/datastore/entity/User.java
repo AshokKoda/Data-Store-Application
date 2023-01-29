@@ -1,5 +1,7 @@
 package com.example.datastore.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,30 +12,34 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userid")
 	private Integer id;
-	
+
 	@Column(length = 45, nullable = false)
 	private String username;
-	
+
 	@Column(length = 45, nullable = false, unique = true)
 	private String email;
-	
+
 	@Column(length = 64, nullable = false)
 	private String password;
+
+	@Column(name = "reg_datetime", nullable = false)
+	private Date dateTime;
 
 	public User() {
 
 	}
 
-	public User(String username, String email, String password) {
+	public User(String username, String email, String password, Date dateTime) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.dateTime = dateTime;
 	}
 
 	public Integer getId() {
@@ -68,9 +74,18 @@ public class User {
 		this.password = password;
 	}
 
+	public Date getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", dateTime=" + dateTime + "]";
 	}
 
 }
